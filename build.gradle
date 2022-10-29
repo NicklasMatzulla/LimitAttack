@@ -1,0 +1,30 @@
+plugins {
+    id 'java'
+    id 'net.minecrell.plugin-yml.bukkit' version '0.5.2'
+}
+
+group 'de.playunlimited.limitattack'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    maven { url 'https://repo.papermc.io/repository/maven-public/' }
+}
+
+dependencies {
+    compileOnly 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+
+    compileOnly 'io.papermc.paper:paper-api:1.19.2-R0.1-SNAPSHOT'
+    implementation 'com.google.code.gson:gson:2.10'
+    implementation 'commons-io:commons-io:2.11.0'
+}
+
+bukkit {
+    main = 'de.playunlimited.limitattack.LimitAttack'
+    name = project.name
+    version = project.version
+    apiVersion = '1.19'
+    authors = ['StaticDev']
+    description = 'LimitAttack is a found game mode from CraftAttack.'
+}

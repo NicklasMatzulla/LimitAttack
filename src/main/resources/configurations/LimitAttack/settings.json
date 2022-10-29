@@ -1,0 +1,15 @@
+{
+  "commands": {
+    "gamemode": {
+      "name": "gamemode",
+      "aliases": [
+        "gm"
+      ],
+      "description": "Setzt den eigenen oder jemand anderes Spielmodus.",
+      "permissions": {
+        "usage": "limitattack.commands.gamemode",
+        "other": "limitattack.commands.gamemode.other"
+      }
+    }
+  }
+}

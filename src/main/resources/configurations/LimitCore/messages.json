@@ -1,0 +1,9 @@
+{
+  "prefix": "&8•&7● &2P&alay&2U&anlimited &8❘ &7",
+  "usage": "&8•&7● &2P&alay&2U&anlimited &8❘ &7Nutze &8» &8/&b",
+  "noPermission": "&8•&7● &2P&alay&2U&anlimited &8❘ &7Der &cBefehl &7wurde &cnicht gefunden&7!",
+  "command": {
+    "playerOnly": "Der &cBefehl &7kann nur von &cSpielern ausgeführt &7werden!",
+    "consoleOnly": "Der &cBefehl &7kann nur von der &cKonsole ausgeführt &7werden!"
+  }
+}
