@@ -1,5 +1,6 @@
 package de.playunlimited.limitcore.command.base;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
@@ -37,6 +38,5 @@ public interface ICommandContext {
 
     @Nullable String joinArgs();
 
-    void send(@NotNull final String message);
-
+    void send(@NotNull Component component);
 }

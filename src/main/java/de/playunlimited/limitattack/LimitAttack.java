@@ -1,8 +1,14 @@
 package de.playunlimited.limitattack;
 
+import de.playunlimited.limitattack.chat.listener.PlayerQuitListener;
+import de.playunlimited.limitattack.chat.listener.PostPlayerVanishListener;
+import de.playunlimited.limitattack.command.DebugCommand;
 import de.playunlimited.limitattack.command.GameModeCommand;
 import de.playunlimited.limitattack.config.MessagesConfiguration;
 import de.playunlimited.limitattack.config.SettingsConfiguration;
+import de.playunlimited.limitattack.chat.listener.AsyncChatListener;
+import de.playunlimited.limitattack.chat.listener.PlayerJoinListener;
+import de.playunlimited.limitcore.CacheProvider;
 import de.playunlimited.limitcore.command.Command;
 import de.playunlimited.limitcore.command.CommandRegister;
 import de.playunlimited.limitcore.config.CoreMessagesConfiguration;
@@ -11,6 +17,7 @@ import de.playunlimited.limitcore.config.util.JsonConfigurationType;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandMap;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
@@ -19,18 +26,33 @@ import java.lang.reflect.Field;
 
 public class LimitAttack extends JavaPlugin {
     @Getter private static LimitAttack instance;
+    @Getter private static CacheProvider cacheProvider;
 
     @Override
     public void onEnable() {
         LimitAttack.instance = this;
-        new CoreSettingsConfiguration(JsonConfigurationType.SYSTEM, new File("plugins/PlayUnlimited.DE/LimitCore/settings.json"), "configurations/LimitCore/settings.json");
-        new CoreMessagesConfiguration(JsonConfigurationType.SYSTEM, new File("plugins/PlayUnlimited.DE/LimitCore/messages.json"), "configurations/LimitCore/messages.json");
+        registerLimitCore();
+
         new SettingsConfiguration(JsonConfigurationType.SETTINGS, new File("plugins/PlayUnlimited.DE/LimitAttack/settings.json"), "configurations/LimitAttack/settings.json");
         new MessagesConfiguration(JsonConfigurationType.MESSAGES, new File("plugins/PlayUnlimited.DE/LimitAttack/messages.json"), "configurations/LimitAttack/messages.json");
 
-        System.out.println(SettingsConfiguration.getInstance().getStringSet("commands.gamemode.aliases"));
+        final PluginManager pluginManager = Bukkit.getPluginManager();
+        pluginManager.registerEvents(new PlayerJoinListener(), this);
+        pluginManager.registerEvents(new PlayerQuitListener(), this);
+        pluginManager.registerEvents(new AsyncChatListener(), this);
+        pluginManager.registerEvents(new PostPlayerVanishListener(), this);
 
         new GameModeCommand();
+        new DebugCommand();
+    }
+
+    private void registerLimitCore() {
+        LimitAttack.cacheProvider = new CacheProvider();
+        new CoreSettingsConfiguration(JsonConfigurationType.SYSTEM, new File("plugins/PlayUnlimited.DE/LimitCore/settings.json"), "configurations/LimitCore/settings.json");
+        new CoreMessagesConfiguration(JsonConfigurationType.SYSTEM, new File("plugins/PlayUnlimited.DE/LimitCore/messages.json"), "configurations/LimitCore/messages.json");
+
+        final PluginManager pluginManager = Bukkit.getPluginManager();
+        pluginManager.registerEvents(new de.playunlimited.limitcore.listener.PlayerQuitListener(), this);
     }
 
     @Override

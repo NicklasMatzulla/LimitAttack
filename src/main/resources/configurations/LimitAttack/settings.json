@@ -1,4 +1,11 @@
 {
+  "features": {
+    "chat": {
+      "permissions": {
+        "colorChat": "limitattack.features.colorchat"
+      }
+    }
+  },
   "commands": {
     "gamemode": {
       "name": "gamemode",

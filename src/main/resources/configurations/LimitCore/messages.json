@@ -1,9 +1,10 @@
 {
-  "prefix": "&8•&7● &2P&alay&2U&anlimited &8❘ &7",
-  "usage": "&8•&7● &2P&alay&2U&anlimited &8❘ &7Nutze &8» &8/&b",
-  "noPermission": "&8•&7● &2P&alay&2U&anlimited &8❘ &7Der &cBefehl &7wurde &cnicht gefunden&7!",
+  "prefix": "<DARK_GRAY>•<GRAY>● <DARK_GREEN>P<GREEN>lay<DARK_GREEN>U<GREEN>nlimited <DARK_GRAY>❘ <GRAY>",
+  "usage": "<DARK_GRAY>•<GRAY>● <DARK_GREEN>P<GREEN>lay<DARK_GREEN>U<GREEN>nlimited <DARK_GRAY>❘ <GRAY>Nutze <DARK_GRAY>» /<AQUA>",
+  "noPermission": "<DARK_GRAY>•<GRAY>● <DARK_GREEN>P<GREEN>lay<DARK_GREEN>U<GREEN>nlimited <DARK_GRAY>❘ <GRAY>Der <RED>Befehl <GRAY>wurde <RED>nicht gefunden<GRAY>!",
   "command": {
-    "playerOnly": "Der &cBefehl &7kann nur von &cSpielern ausgeführt &7werden!",
-    "consoleOnly": "Der &cBefehl &7kann nur von der &cKonsole ausgeführt &7werden!"
+    "playerOnly": "Der <RED>Befehl <GRAY>kann nur von <RED>Spielern ausgeführt <GRAY>werden!",
+    "consoleOnly": "Der <RED>Befehl <GRAY>kann nur von der <RED>Konsole ausgeführt <GRAY>werden!",
+    "playerNotFound": "Der <RED>Spieler <GRAY>konnte <RED>nicht gefunden <GRAY>werden!"
   }
 }

@@ -1,10 +1,19 @@
 {
+  "features": {
+    "chat": {
+      "format": "&8•&7● <prefix><chatColor><player> &8» &7<message>"
+    },
+    "tablist": {
+      "header": "\n&8•&7● &2P&alay&2U&anlimited &8| &eyou play, you decide! &7●&8•\n&8•&7● Willkommen, &e<player>&7!\n",
+      "footer": "\n&8•&7● Server &8| &b<server>\n&8•&7● Spielerzahl &8| &b<playerCount>&8/&b<maxPlayerCount>\n\n&8•&7● Rang &8| &7<permissionGroupChatColor><permissionGroupName>"
+    }
+  },
   "commands": {
     "gamemode": {
-      "usage": "gamemode &8<&b0&8/&b1&8/&b2&8/&b3&8> &8{&bSpieler&8}",
+      "usage": "gamemode <GRAY><<AQUA>0<DARK_GRAY>/<AQUA>1<DARK_GRAY>/<AQUA>2<DARK_GRAY>/<AQUA>3<DARK_GRAY>> <DARK_GRAY>{<AQUA>Spieler<DARK_GRAY>}",
       "messages": {
-        "alreadyMode": "Du &cbist bereits &7im &b<gameMode>&7!",
-        "changedMode": "Du &abefindest &7dich nun im &b<gameMode>&7.",
+        "alreadyMode": "Du <RED>bist bereits <GRAY>im <AQUA><gameMode><GRAY>!",
+        "changedMode": "Du <GREEN>befindest <GRAY>dich nun im <AQUA><gameMode><GRAY>.",
         "types": {
           "survival": "Überlebensmodus",
           "creative": "Kreativmodus",

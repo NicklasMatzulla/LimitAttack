@@ -1,6 +1,7 @@
 package de.playunlimited.limitcore.command;
 
 import com.google.common.collect.Lists;
+import de.myzelyam.api.vanish.VanishAPI;
 import de.playunlimited.limitcore.command.base.ICommandContext;
 import de.playunlimited.limitcore.command.base.ITabContext;
 import de.playunlimited.limitcore.command.tabcomplete.TabContext;

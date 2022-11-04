@@ -1,5 +1,7 @@
 package de.playunlimited.limitcore.command.base;
 
+import de.playunlimited.limitattack.util.FormatUtil;
+import net.kyori.adventure.text.Component;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
@@ -29,7 +31,7 @@ public abstract class AbstractCommandContext implements ICommandContext {
 
     @Override
     public void sendMessage(@NotNull final String message) {
-        send(message);
+        send(FormatUtil.toComponent(message));
     }
 
     @Override
@@ -92,7 +94,7 @@ public abstract class AbstractCommandContext implements ICommandContext {
     }
 
     @Override
-    public void send(@NotNull final String message) {
-        sender.sendMessage(message);
+    public void send(@NotNull final Component component) {
+        sender.sendMessage(component);
     }
 }

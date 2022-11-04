@@ -11,6 +11,7 @@ import java.util.Set;
 public class SettingsConfiguration extends JsonConfiguration {
     @Getter private static SettingsConfiguration instance;
 
+    public final String FEATURES_CHAT_PERMISSION_COLOR_CHAT;
     public final String COMMAND_GAMEMODE_NAME;
     public final Set<String> COMMAND_GAMEMODE_ALIASES;
     public final String COMMAND_GAMEMODE_DESCRIPTION;
@@ -21,6 +22,7 @@ public class SettingsConfiguration extends JsonConfiguration {
         super(configurationType, configurationFile, classpathFile);
         SettingsConfiguration.instance = this;
 
+        this.FEATURES_CHAT_PERMISSION_COLOR_CHAT = getString("features.chat.permissions.colorChat");
         this.COMMAND_GAMEMODE_NAME = getString("commands.gamemode.name");
         this.COMMAND_GAMEMODE_ALIASES = getStringSet("commands.gamemode.aliases");
         this.COMMAND_GAMEMODE_DESCRIPTION = getString("commands.gamemode.description");
