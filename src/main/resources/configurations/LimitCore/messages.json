@@ -5,6 +5,8 @@
   "command": {
     "playerOnly": "Der <RED>Befehl <GRAY>kann nur von <RED>Spielern ausgeführt <GRAY>werden!",
     "consoleOnly": "Der <RED>Befehl <GRAY>kann nur von der <RED>Konsole ausgeführt <GRAY>werden!",
-    "playerNotFound": "Der <RED>Spieler <GRAY>konnte <RED>nicht gefunden <GRAY>werden!"
+    "playerNotFound": "Der <RED>Spieler <GRAY>konnte <RED>nicht gefunden <GRAY>werden!",
+    "playerNotEditable": "Du kannst <targetDisplayName> <GRAY>nicht bearbeiten!",
+    "cannotExecuteSubCommand": "Du hast auf diese <REDFunktion keinen Zugriff<GRAY>!"
   }
 }

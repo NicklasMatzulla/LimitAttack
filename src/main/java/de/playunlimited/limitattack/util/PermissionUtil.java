@@ -1,15 +1,5 @@
 package de.playunlimited.limitattack.util;
 
-import com.comphenix.protocol.PacketType;
-import com.comphenix.protocol.ProtocolLibrary;
-import com.comphenix.protocol.ProtocolManager;
-import com.comphenix.protocol.events.InternalStructure;
-import com.comphenix.protocol.events.PacketContainer;
-import com.comphenix.protocol.utility.MinecraftReflection;
-import com.comphenix.protocol.wrappers.WrappedChatComponent;
-import com.google.common.collect.Lists;
-import net.kyori.adventure.text.minimessage.MiniMessage;
-import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.LuckPermsProvider;
 import net.luckperms.api.model.group.Group;
@@ -18,13 +8,12 @@ import net.luckperms.api.model.user.User;
 import net.luckperms.api.model.user.UserManager;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-import org.bukkit.scoreboard.Scoreboard;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Optional;
 import java.util.UUID;
 
+@SuppressWarnings("unused")
 public class PermissionUtil {
     public static LuckPerms luckPerms = LuckPermsProvider.get();
 
@@ -55,6 +44,7 @@ public class PermissionUtil {
         return groupManager.getGroup(primaryGroupName);
     }
 
+    @SuppressWarnings("ConstantConditions")
     public static @NotNull String getPermissionGroupName(@NotNull final Group permissionGroup) {
         return permissionGroup.getDisplayName();
     }
@@ -72,5 +62,9 @@ public class PermissionUtil {
     public static @NotNull ChatColor getPermissionGroupChatColor(@NotNull final Group permissionGroup) {
         final String textColor = permissionGroup.getCachedData().getMetaData().getMetaValue("chatColor");
         return ChatColor.valueOf(textColor);
+    }
+
+    public static @NotNull String getPermissionGroupRawChatColor(@NotNull final Group permissionGroup) {
+        return "<" + permissionGroup.getCachedData().getMetaData().getMetaValue("chatColor") + ">";
     }
 }

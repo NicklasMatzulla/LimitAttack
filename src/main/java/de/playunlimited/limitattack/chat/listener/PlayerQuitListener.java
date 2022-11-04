@@ -19,7 +19,7 @@ public class PlayerQuitListener implements Listener {
         final ScoreboardTeam scoreboardTeam = (ScoreboardTeam) LimitAttack.getCacheProvider().getUserCache(player.getUniqueId()).get("ScoreboardTeam");
         for (final Player onlinePlayer : Bukkit.getOnlinePlayers())
             scoreboardTeam.unregisterViewerScoreboardTeam(onlinePlayer);
-        TablistStyle.updateTablist();
+        Bukkit.getScheduler().scheduleSyncDelayedTask(LimitAttack.getInstance(), TablistStyle::updateTablist, 1);
     }
 
 }

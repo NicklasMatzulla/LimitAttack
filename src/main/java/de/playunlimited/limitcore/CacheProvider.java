@@ -29,6 +29,10 @@ public class CacheProvider {
         public @Nullable Object set(@NotNull final Object key, @NotNull final Object value) {
             return this.userCache.put(key, value);
         }
+
+        public @Nullable Object remove(@NotNull final Object key) {
+            return this.userCache.remove(key);
+        }
     }
 
 }

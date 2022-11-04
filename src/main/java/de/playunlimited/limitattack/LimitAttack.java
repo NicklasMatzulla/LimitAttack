@@ -1,13 +1,10 @@
 package de.playunlimited.limitattack;
 
-import de.playunlimited.limitattack.chat.listener.PlayerQuitListener;
-import de.playunlimited.limitattack.chat.listener.PostPlayerVanishListener;
+import de.playunlimited.limitattack.chat.listener.*;
 import de.playunlimited.limitattack.command.DebugCommand;
 import de.playunlimited.limitattack.command.GameModeCommand;
 import de.playunlimited.limitattack.config.MessagesConfiguration;
 import de.playunlimited.limitattack.config.SettingsConfiguration;
-import de.playunlimited.limitattack.chat.listener.AsyncChatListener;
-import de.playunlimited.limitattack.chat.listener.PlayerJoinListener;
 import de.playunlimited.limitcore.CacheProvider;
 import de.playunlimited.limitcore.command.Command;
 import de.playunlimited.limitcore.command.CommandRegister;
@@ -41,6 +38,7 @@ public class LimitAttack extends JavaPlugin {
         pluginManager.registerEvents(new PlayerQuitListener(), this);
         pluginManager.registerEvents(new AsyncChatListener(), this);
         pluginManager.registerEvents(new PostPlayerVanishListener(), this);
+        pluginManager.registerEvents(new PlayerChangedWorldListener(), this);
 
         new GameModeCommand();
         new DebugCommand();
@@ -60,6 +58,7 @@ public class LimitAttack extends JavaPlugin {
         super.onDisable();
     }
 
+    @SuppressWarnings("ConstantConditions")
     public void addCommand(@NotNull final Command... commands) {
         CommandMap map = null;
         Field field;

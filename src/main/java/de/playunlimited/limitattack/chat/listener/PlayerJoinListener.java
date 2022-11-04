@@ -1,6 +1,5 @@
 package de.playunlimited.limitattack.chat.listener;
 
-import de.myzelyam.api.vanish.PostPlayerHideEvent;
 import de.myzelyam.api.vanish.VanishAPI;
 import de.playunlimited.limitattack.LimitAttack;
 import de.playunlimited.limitattack.chat.ScoreboardTeam;
@@ -13,8 +12,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-
 public class PlayerJoinListener implements Listener {
 
     @SuppressWarnings("ConstantConditions")
@@ -23,33 +20,41 @@ public class PlayerJoinListener implements Listener {
         final Player player = event.getPlayer();
         if (!player.hasPermission("pv.joinvanished")) {
             final ScoreboardTeam scoreboardTeam = new ScoreboardTeam(player);
-            final ScoreboardTeam.CategorizedScoreboardTeam defaultScoreboardTeam = scoreboardTeam.getCategorizedScoreboardTeam("default");
+            final ScoreboardTeam.CategorizedScoreboardTeam defaultScoreboardTeam = scoreboardTeam.getDefaultScoreboardTeam();
             final CacheProvider cacheProvider = LimitAttack.getCacheProvider();
             for (final Player onlinePlayers : Bukkit.getOnlinePlayers()) {
                 defaultScoreboardTeam.addViewablePlayer(onlinePlayers);
                 if (player != onlinePlayers) {
                     final ScoreboardTeam onlinePlayerScoreboardTeam = (ScoreboardTeam) cacheProvider.getUserCache(onlinePlayers.getUniqueId()).get("ScoreboardTeam");
-                    final ScoreboardTeam.CategorizedScoreboardTeam onlinePlayerDefaultScoreboardTeam = onlinePlayerScoreboardTeam.getCategorizedScoreboardTeam("default");
+                    final ScoreboardTeam.CategorizedScoreboardTeam onlinePlayerDefaultScoreboardTeam = onlinePlayerScoreboardTeam.getDefaultScoreboardTeam();
                     onlinePlayerDefaultScoreboardTeam.addViewablePlayer(player);
                 }
             }
             TablistStyle.updateTablist();
         } else {
-            new ScoreboardTeam(player);
-            Bukkit.getPluginManager().callEvent(new PostPlayerHideEvent(player, false));
-            final ArrayList<Player> vanishedPlayers = new ArrayList<>();
+            final ScoreboardTeam scoreboardTeam = new ScoreboardTeam(player);
+            final ScoreboardTeam.CategorizedScoreboardTeam vanishScoreboardTeam = scoreboardTeam.getVanishScoreboardTeam();
+            final CacheProvider cacheProvider = LimitAttack.getCacheProvider();
+            cacheProvider.getUserCache(player.getUniqueId()).set("SetPlayerJoinVanishedScoreboard", true);
             for (final Player onlinePlayers : Bukkit.getOnlinePlayers()) {
-                if (VanishAPI.isInvisible(onlinePlayers))
-                    vanishedPlayers.add(onlinePlayers);
-            }
-            for (final Player vanishedOnlinePlayers : vanishedPlayers) {
-                final ScoreboardTeam vanishedOnlinePlayerScoreboardTeam = (ScoreboardTeam) LimitAttack.getCacheProvider().getUserCache(vanishedOnlinePlayers.getUniqueId()).get("ScoreboardTeam");
-                final ScoreboardTeam.CategorizedScoreboardTeam vanishScoreboardTeam = vanishedOnlinePlayerScoreboardTeam.getCategorizedScoreboardTeam("vanish");
-                for (final Player onlinePlayers : Bukkit.getOnlinePlayers()) {
-                    if (player != null && VanishAPI.canSee(onlinePlayers, vanishedOnlinePlayers))
+                if (player != onlinePlayers) {
+                    if (VanishAPI.canSee(onlinePlayers, player))
                         vanishScoreboardTeam.addViewablePlayer(onlinePlayers);
+                    if (VanishAPI.isInvisible(onlinePlayers)) {
+                        if (VanishAPI.canSee(player, onlinePlayers)) {
+                            final ScoreboardTeam onlinePlayerScoreboardTeam = (ScoreboardTeam) cacheProvider.getUserCache(onlinePlayers.getUniqueId()).get("ScoreboardTeam");
+                            final ScoreboardTeam.CategorizedScoreboardTeam onlinePlayerVanishScoreboardTeam = onlinePlayerScoreboardTeam.getVanishScoreboardTeam();
+                            onlinePlayerVanishScoreboardTeam.addViewablePlayer(player);
+                        }
+                    } else {
+                        final ScoreboardTeam onlinePlayerScoreboardTeam = (ScoreboardTeam) cacheProvider.getUserCache(onlinePlayers.getUniqueId()).get("ScoreboardTeam");
+                        final ScoreboardTeam.CategorizedScoreboardTeam onlinePlayerDefaultScoreboardTeam = onlinePlayerScoreboardTeam.getDefaultScoreboardTeam();
+                        onlinePlayerDefaultScoreboardTeam.addViewablePlayer(player);
+                    }
                 }
             }
+            Bukkit.getScheduler().scheduleSyncDelayedTask(LimitAttack.getInstance(), () -> vanishScoreboardTeam.addViewablePlayer(player), 50);
+            TablistStyle.updateTablist();
         }
     }
 

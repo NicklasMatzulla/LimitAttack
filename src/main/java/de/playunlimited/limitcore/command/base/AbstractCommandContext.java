@@ -35,6 +35,11 @@ public abstract class AbstractCommandContext implements ICommandContext {
     }
 
     @Override
+    public void sendMessage(@NotNull final String message, @NotNull final Player player) {
+        send(FormatUtil.toComponent(message), player);
+    }
+
+    @Override
     public boolean isPlayer() {
         return this.sender instanceof Player;
     }
@@ -96,5 +101,10 @@ public abstract class AbstractCommandContext implements ICommandContext {
     @Override
     public void send(@NotNull final Component component) {
         sender.sendMessage(component);
+    }
+
+    @Override
+    public void send(@NotNull final Component component, @NotNull final Player player) {
+        player.sendMessage(component);
     }
 }

@@ -4,16 +4,22 @@
       "format": "&8•&7● <prefix><chatColor><player> &8» &7<message>"
     },
     "tablist": {
-      "header": "\n&8•&7● &2P&alay&2U&anlimited &8| &eyou play, you decide! &7●&8•\n&8•&7● Willkommen, &e<player>&7!\n",
-      "footer": "\n&8•&7● Server &8| &b<server>\n&8•&7● Spielerzahl &8| &b<playerCount>&8/&b<maxPlayerCount>\n\n&8•&7● Rang &8| &7<permissionGroupChatColor><permissionGroupName>"
+      "header": "\n   &8&m■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■&r   \n\n&8•&7● &2P&alay&2U&anlimited &8| &eyou play, you decide! &7●&8•\n&8•&7● Willkommen, &e<player>&7!\n",
+      "footer": "\n&8•&7● Server &8| &b<server>\n&8•&7● Spielerzahl &8| &b<playerCount>&8/&b<maxPlayerCount>\n\n&8•&7● Rang &8| &7<permissionGroupChatColor><permissionGroupName>\n\n   &8&m■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■&r   \n"
     }
   },
   "commands": {
     "gamemode": {
       "usage": "gamemode <GRAY><<AQUA>0<DARK_GRAY>/<AQUA>1<DARK_GRAY>/<AQUA>2<DARK_GRAY>/<AQUA>3<DARK_GRAY>> <DARK_GRAY>{<AQUA>Spieler<DARK_GRAY>}",
       "messages": {
-        "alreadyMode": "Du <RED>bist bereits <GRAY>im <AQUA><gameMode><GRAY>!",
-        "changedMode": "Du <GREEN>befindest <GRAY>dich nun im <AQUA><gameMode><GRAY>.",
+        "alreadyMode": {
+          "self": "Du <RED>bist bereits <GRAY>im <AQUA><gameMode><GRAY>!",
+          "other": "<targetDisplayName> <GRAY>ist bereits im <AQUA><gameMode><GRAY>!"
+        },
+        "changedMode": {
+          "self": "Du <GREEN>befindest <GRAY>dich nun im <AQUA><gameMode><GRAY>.",
+          "other": "<targetDisplayName> <GREEN>befindet <GRAY>sich nun im <AQUA><gameMode><GRAY>."
+        },
         "types": {
           "survival": "Überlebensmodus",
           "creative": "Kreativmodus",

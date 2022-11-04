@@ -10,11 +10,14 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
+@SuppressWarnings("unused")
 public interface ICommandContext {
 
     @NotNull Plugin getPlugin();
 
     void sendMessage(@NotNull final String message);
+
+    void sendMessage(@NotNull final String message, @NotNull final Player player);
 
     boolean isPlayer();
 
@@ -38,5 +41,7 @@ public interface ICommandContext {
 
     @Nullable String joinArgs();
 
-    void send(@NotNull Component component);
+    void send(@NotNull final Component component);
+
+    void send(@NotNull Component component, @NotNull final Player player);
 }

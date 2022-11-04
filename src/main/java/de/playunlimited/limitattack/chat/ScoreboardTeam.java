@@ -24,6 +24,7 @@ import java.util.HashMap;
 import java.util.Optional;
 import java.util.UUID;
 
+@SuppressWarnings("unused")
 public class ScoreboardTeam {
     private static final ProtocolManager PROTOCOL_MANAGER = ProtocolLibrary.getProtocolManager();
     private final HashMap<String, CategorizedScoreboardTeam> scoreboardTeams = new HashMap<>();
@@ -57,6 +58,7 @@ public class ScoreboardTeam {
         return this.scoreboardTeams.get(key);
     }
 
+    @SuppressWarnings("DuplicatedCode")
     private void createDefaultScoreboardTeam() {
         final User permissionUser = PermissionUtil.getUserFromPlayer(this.player);
         final Group permissionGroup = PermissionUtil.getPermissionGroup(permissionUser);
@@ -66,6 +68,28 @@ public class ScoreboardTeam {
         final String scoreboardTeamPrefix = FormatUtil.toJson(permissionGroupPrefix);
         final ChatColor scoreboardTeamChatColor = PermissionUtil.getPermissionGroupChatColor(permissionGroup);
         createSpecificScoreboardTeam("default", scoreboardTeamName, scoreboardTeamChatColor, scoreboardTeamPrefix, null);
+    }
+
+    public @NotNull CategorizedScoreboardTeam getDefaultScoreboardTeam() {
+        return this.scoreboardTeams.get("default");
+    }
+
+    @SuppressWarnings("DuplicatedCode")
+    private void createVanishScoreboardTeam() {
+        final User permissionUser = PermissionUtil.getUserFromPlayer(this.player);
+        final Group permissionGroup = PermissionUtil.getPermissionGroup(permissionUser);
+        final int permissionGroupWeight = PermissionUtil.getPermissionGroupWeight(permissionGroup);
+        final String permissionGroupPrefix = PermissionUtil.getPermissionGroupPrefix(permissionGroup);
+        final String scoreboardTeamName = getScoreboardTeamName(permissionGroupWeight, this.player.getName());
+        final String scoreboardTeamPrefix = FormatUtil.toJson(permissionGroupPrefix);
+        final ChatColor scoreboardTeamChatColor = PermissionUtil.getPermissionGroupChatColor(permissionGroup);
+        createSpecificScoreboardTeam("vanish", scoreboardTeamName, scoreboardTeamChatColor, scoreboardTeamPrefix, FormatUtil.toJson(" <DARK_GRAY>[<YELLOW>VANISH<DARK_GRAY>]"));
+    }
+
+    public @NotNull CategorizedScoreboardTeam getVanishScoreboardTeam() {
+        if (!this.scoreboardTeams.containsKey("vanish"))
+            createVanishScoreboardTeam();
+        return this.scoreboardTeams.get("vanish");
     }
 
     @SuppressWarnings({"UnusedReturnValue"})
@@ -111,8 +135,7 @@ public class ScoreboardTeam {
         }
 
         public void removeViewablePlayer(@NotNull final Player viewer) {
-            if (this.viewablePlayers.contains(viewer.getUniqueId()))
-                this.viewablePlayers.remove(viewer.getUniqueId());
+            this.viewablePlayers.remove(viewer.getUniqueId());
             sendDeleteTeamPacket(viewer);
         }
 
